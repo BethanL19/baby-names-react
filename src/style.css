@@ -1,3 +1,32 @@
 html {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-left: 32px;
+  margin-right: 32px;
+  border: 2px solid lightblue;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.nameButtonsf {
+  background: rgb(245, 245, 195);
+  border-radius: 8px;
+  padding: 4px;
+  margin: 1px auto;
+}
+
+.nameButtonsm {
+  background: rgb(210, 245, 210);
+  border-radius: 8px;
+  padding: 4px;
+  margin: 1px auto;
+}
+
+.searchBar {
+  border: 2px solid lightblue;
+  border-radius: 8px;
+  padding: 4px;
+  margin: 20px auto;
+  display: block;
 }

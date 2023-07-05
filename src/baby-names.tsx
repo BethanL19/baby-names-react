@@ -1,22 +1,38 @@
 import { NamesDataInfo, namesData } from "./babyNamesData";
 
-interface BabyNameProps {
+interface BabyNameButtonProps {
   nameData: NamesDataInfo;
 }
 
-function BabyNameButton(props: BabyNameProps): JSX.Element {
+function BabyNameButton(props: BabyNameButtonProps): JSX.Element {
   return (
     <>
-      <button>{props.nameData.name}</button>
+      <button className={"nameButtons" + props.nameData.sex}>
+        {props.nameData.name}
+      </button>
     </>
   );
 }
 
-function BabyNames(): JSX.Element {
-  const namesArray = namesData.map((item, index) => (
+interface BabyNamesProps {
+  typedSearchState: string;
+}
+
+function BabyNames(props: BabyNamesProps): JSX.Element {
+  const sortedNamesData = [...namesData].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  if (props.typedSearchState.length > 0) {
+    namesData.filter((who) => who.name.match(props.typedSearchState));
+  }
+
+  const namesArray = sortedNamesData.map((item, index) => (
     <BabyNameButton key={index} nameData={item} />
   ));
-  return <>{namesArray}</>;
+  return <div>{namesArray}</div>;
 }
 
 export { BabyNameButton, BabyNames };
+
+// centre buttons
