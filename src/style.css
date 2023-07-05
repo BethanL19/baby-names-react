@@ -30,3 +30,9 @@ html {
   margin: 20px auto;
   display: block;
 }
+
+.favs {
+  padding: 10px;
+  color: lightblue;
+  border-bottom: 2px solid lightblue;
+}
