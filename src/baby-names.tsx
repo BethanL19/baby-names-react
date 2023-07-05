@@ -6,9 +6,16 @@ interface BabyNameButtonProps {
 }
 
 function BabyNameButton(props: BabyNameButtonProps): JSX.Element {
+  const [favName, setFavName] = useState<string[]>([]);
+  const handleClickedFavs = () => {
+    setFavName([...favName]);
+  };
   return (
     <>
-      <button className={"nameButtons" + props.nameData.sex}>
+      <button
+        className={"nameButtons" + props.nameData.sex}
+        onClick={handleClickedFavs}
+      >
         {props.nameData.name}
       </button>
     </>
@@ -44,6 +51,7 @@ function BabyNames(): JSX.Element {
         value={typedSearch}
         onChange={(event) => handleSearch(event.target.value)}
       />
+      <h3 className="favs">Favourites: </h3>
       {namesArray}
     </div>
   );
