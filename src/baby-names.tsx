@@ -3,18 +3,15 @@ import { NamesDataInfo, namesData } from "./babyNamesData";
 
 interface BabyNameButtonProps {
   nameData: NamesDataInfo;
+  handleClickedFavs: (name: string) => void;
 }
 
 function BabyNameButton(props: BabyNameButtonProps): JSX.Element {
-  const [favName, setFavName] = useState<string[]>([]);
-  const handleClickedFavs = () => {
-    setFavName([...favName]);
-  };
   return (
     <>
       <button
+        onClick={() => props.handleClickedFavs(props.nameData.name)}
         className={"nameButtons" + props.nameData.sex}
-        onClick={handleClickedFavs}
       >
         {props.nameData.name}
       </button>
@@ -25,6 +22,13 @@ function BabyNameButton(props: BabyNameButtonProps): JSX.Element {
 function BabyNames(): JSX.Element {
   const [typedSearch, setTypedSearch] = useState("");
   const handleSearch = (searchWord: string) => setTypedSearch(searchWord);
+
+  const [favName, setFavName] = useState<string>("");
+  const [favNamesList, setFaveNamesList] = useState<string[]>([]);
+  const handleClickedFavs = (name: string) => {
+    setFaveNamesList([...favNamesList, favName]);
+    setFavName(name);
+  };
 
   let filteredNamesData;
   if (typedSearch.length > 0) {
@@ -40,7 +44,11 @@ function BabyNames(): JSX.Element {
   );
 
   const namesArray = sortedNamesData.map((item, index) => (
-    <BabyNameButton key={index} nameData={item} />
+    <BabyNameButton
+      key={index}
+      nameData={item}
+      handleClickedFavs={handleClickedFavs}
+    />
   ));
 
   return (
@@ -51,7 +59,12 @@ function BabyNames(): JSX.Element {
         value={typedSearch}
         onChange={(event) => handleSearch(event.target.value)}
       />
-      <h3 className="favs">Favourites: </h3>
+      <h3 className="favs">
+        Favourites:{" "}
+        {favNamesList.slice(1).map((n, index) => (
+          <button key={index}>{n}</button>
+        ))}
+      </h3>
       {namesArray}
     </div>
   );
