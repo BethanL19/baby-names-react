@@ -71,3 +71,7 @@ function BabyNames(): JSX.Element {
 }
 
 export { BabyNameButton, BabyNames };
+
+// gender formating needed on favs
+// add as soon as name clicked?
+// remove from main buttons (will stops dupes)
