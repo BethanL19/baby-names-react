@@ -6,6 +6,8 @@ interface BabyNameButtonProps {
   handleClickedFavs: (item: NamesDataInfo) => void;
 }
 
+type Gender = "girl" | "boy" | "all";
+
 function BabyNameButton(props: BabyNameButtonProps): JSX.Element {
   return (
     <>
@@ -35,16 +37,59 @@ function BabyNames(): JSX.Element {
     setFaveNamesList([...favNamesList]);
   };
 
+  const [girlButtonActive, setGirlButtonActive] = useState({
+    borderBottom: "4px solid white",
+  });
+  const [boyButtonActive, setBoyButtonActive] = useState({
+    borderBottom: "4px solid white",
+  });
+  const [allButtonActive, setAllButtonActive] = useState({
+    borderBottom: "4px solid black",
+  });
+  const [genderFilter, setGenderFilter] = useState<Gender>("all");
+  const handleGirlClicked = () => {
+    setGenderFilter("girl");
+    setGirlButtonActive({ borderBottom: "4px solid black" });
+    setBoyButtonActive({ borderBottom: "4px solid white" });
+    setAllButtonActive({ borderBottom: "4px solid white" });
+  };
+  const handleBoyClicked = () => {
+    setGenderFilter("boy");
+    setBoyButtonActive({ borderBottom: "4px solid black" });
+    setGirlButtonActive({ borderBottom: "4px solid white" });
+    setAllButtonActive({ borderBottom: "4px solid white" });
+  };
+  const handleAllClicked = () => {
+    setGenderFilter("all");
+    setAllButtonActive({ borderBottom: "4px solid black" });
+    setBoyButtonActive({ borderBottom: "4px solid white" });
+    setGirlButtonActive({ borderBottom: "4px solid white" });
+  };
+  const genderFilterOutcome = (item: NamesDataInfo) => {
+    if (genderFilter === "girl") {
+      return item.sex === "f";
+    } else if (genderFilter === "boy") {
+      return item.sex === "m";
+    } else {
+      return true;
+    }
+  };
+
+  const filteredFavsList = favNamesList.filter((item) =>
+    genderFilterOutcome(item)
+  );
+
   let filteredNamesData;
   if (typedSearch.length > 0) {
     filteredNamesData = namesData.filter(
       (item) =>
         item.name.toLowerCase().includes(typedSearch.toLowerCase()) &&
-        !favNamesList.includes(item)
+        !favNamesList.includes(item) &&
+        genderFilterOutcome(item)
     );
   } else {
     filteredNamesData = namesData.filter(
-      (item) => !favNamesList.includes(item)
+      (item) => !favNamesList.includes(item) && genderFilterOutcome(item)
     );
   }
 
@@ -68,9 +113,32 @@ function BabyNames(): JSX.Element {
         value={typedSearch}
         onChange={(event) => handleSearch(event.target.value)}
       />
+      <div className="filterButtons">
+        <button
+          className="girl"
+          onClick={handleGirlClicked}
+          style={girlButtonActive}
+        >
+          🐣
+        </button>
+        <button
+          className="boy"
+          onClick={handleBoyClicked}
+          style={boyButtonActive}
+        >
+          🐣
+        </button>
+        <button
+          className="all"
+          onClick={handleAllClicked}
+          style={allButtonActive}
+        >
+          🐣
+        </button>
+      </div>
       <h3 className="favs">
         Favourites:{" "}
-        {favNamesList.map((item, index) => (
+        {filteredFavsList.map((item, index) => (
           <button
             className={"nameButtons" + item.sex}
             key={index}
@@ -86,7 +154,3 @@ function BabyNames(): JSX.Element {
 }
 
 export { BabyNameButton, BabyNames };
-
-// gender formating needed on favs
-// add as soon as name clicked?
-// remove from main buttons (will stops dupes)
