@@ -14,6 +14,7 @@ html {
   border-radius: 8px;
   padding: 4px;
   margin: 1px auto;
+  border: 2px solid white;
 }
 
 .nameButtonsm {
@@ -21,6 +22,7 @@ html {
   border-radius: 8px;
   padding: 4px;
   margin: 1px auto;
+  border: 2px solid white;
 }
 
 .searchBar {
@@ -35,4 +37,34 @@ html {
   padding: 10px;
   color: lightblue;
   border-bottom: 2px solid lightblue;
+}
+
+.filterButtons {
+  padding: 4px;
+  margin: 20px auto;
+  display: inline;
+}
+
+.boy {
+  background: rgb(210, 245, 210);
+  border-radius: 8px;
+  font-size: x-large;
+  margin: 2px;
+  border: 4px solid white;
+}
+
+.girl {
+  background: rgb(245, 245, 195);
+  border-radius: 8px;
+  font-size: x-large;
+  margin: 2px;
+  border: 4px solid white;
+}
+
+.all {
+  background: lightblue;
+  border-radius: 8px;
+  font-size: x-large;
+  margin: 2px;
+  border: 4px solid white;
 }
