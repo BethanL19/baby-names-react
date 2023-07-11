@@ -115,6 +115,13 @@ function BabyNames(): JSX.Element {
       />
       <div className="filterButtons">
         <button
+          className="all"
+          onClick={handleAllClicked}
+          style={allButtonActive}
+        >
+          🐣
+        </button>
+        <button
           className="girl"
           onClick={handleGirlClicked}
           style={girlButtonActive}
@@ -125,13 +132,6 @@ function BabyNames(): JSX.Element {
           className="boy"
           onClick={handleBoyClicked}
           style={boyButtonActive}
-        >
-          🐣
-        </button>
-        <button
-          className="all"
-          onClick={handleAllClicked}
-          style={allButtonActive}
         >
           🐣
         </button>
