@@ -1,5 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Cabin:wght@400;500&display=swap");
+
 html {
-  font-family: "Roboto", sans-serif;
+  font-family: "Cabin", sans-serif;
+  font-weight: bolder;
+  font-size: large;
   margin-top: 16px;
   margin-bottom: 16px;
   margin-left: 32px;
@@ -43,6 +47,8 @@ html {
   padding: 4px;
   margin: 20px auto;
   display: inline;
+  margin-left: 46%;
+  margin-right: 54%;
 }
 
 .boy {
